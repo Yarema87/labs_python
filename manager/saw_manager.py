@@ -160,9 +160,5 @@ class SawManager:
 
 if __name__ == '__main__':
     manager = SawManager()
-    print(f"length: {len(manager)}, getitem: {manager.__getitem__(2)}")
-    print(f"comprehension: {manager.comprehension()}")
-    manager.enumerating()
-    print(f"zipping: {manager.zipping()}")
-    print(f"dictionary: {manager.dictionary()}")
-    print(f"all or any: {manager.all_or_any()}")
+    chainsaw4 = Chainsaw(6.5, "T-1000", 1100, ("fuel", "electricity"), 3.7, 3.5, True)
+    chainsaw4.start()

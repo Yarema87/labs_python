@@ -1,4 +1,24 @@
+from models.exceptions import AlreadyIsException
 from abc import ABC, abstractmethod
+import logging
+
+
+def exception_logger(mode):
+    def decorator(func):
+        def wrapper(*args):
+            try:
+                return func(*args)
+            except AlreadyIsException as e:
+                if mode == "file":
+                    logging.basicConfig(filename="exceptions.txt", level=logging.ERROR)
+                    logging.error(e)
+                elif mode == "console":
+                    logging.basicConfig(level=logging.ERROR)
+                    logging.error(e)
+                else:
+                    raise ValueError("Invalid logging mode")
+        return wrapper
+    return decorator
 
 
 class Saw(ABC):
@@ -29,14 +49,24 @@ class Saw(ABC):
         """
         pass
 
+    @exception_logger("file")
     def start(self):
         """
         make saw working
+        if it already is, raises exception
         """
-        self.is_working = True
+        if self.is_working:
+            raise AlreadyIsException("Already works")
+        else:
+            self.is_working = True
 
+    @exception_logger("console")
     def stop(self):
         """
         make saw not working
+        if it already is, raises exception
         """
-        self.is_working = False
+        if not self.is_working:
+            raise AlreadyIsException("Already doesn't work")
+        else:
+            self.is_working = True
