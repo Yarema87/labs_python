@@ -1,12 +1,15 @@
+
 from models.saw import Saw
 
 
 class Chainsaw(Saw):
+
     """
     Class which describes a model of chainsaw
     """
     instance = None
 
+<
     def __init__(self, worktime=8, brand="T-800", power=1100, fuel_tank_capacity=3.7, fuel_level=3.3, is_working=False):
         """
         :param worktime: how much time (in hours) can this chainsaw work
@@ -17,6 +20,7 @@ class Chainsaw(Saw):
         :param is_working: is this chainsaw working now
         default parameters are describing some spherical chainsaw in vacuum
         """
+
         super().__init__(brand, power, worktime, is_working)
         self.fuel_tank_capacity = fuel_tank_capacity
         self.fuel_level = fuel_level
